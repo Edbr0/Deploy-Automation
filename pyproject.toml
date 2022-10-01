@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "deploy-automation"
+version = "0.1.0"
+description = "Script de automacao dos deploys dos projetos da healthd"
+authors = ["Eduardo Oliveira <eduardo.olivei@outlook.com>"]
+readme = "README.md"
+packages = [{include = "deploy_automation"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+PyAutoGUI = "^0.9.53"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
