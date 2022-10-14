@@ -3,11 +3,16 @@ import time
 import json
 import platform
 from projects import projects
+import os as sys
+from pathlib import Path
 
 os = platform.system()
 
+current_path = sys.path.dirname(__file__)
 
 # Verifica se o arquivo de persistencia de dados ja existe
+
+
 def fileExist(file_name):
     try:
         file = open(file_name)
@@ -148,8 +153,8 @@ def captureCredentials():
     git_login = input(str('Usuário Git: '))
     git_pssw = input(str('Senha Git: '))
     id_server = 1
-    if fileExist('data.json') is True:
-        servers = getData('data.json')
+    if fileExist(current_path+'/data.json') is True:
+        servers = getData(current_path+'/data.json')
         id_server = servers[-1]["id"] + 1
     data = {'id': id_server, 'server': server, 'user_server': user, 'password_server': password_server,
             'git_login': git_login, 'git_pssw': git_pssw}
@@ -158,7 +163,7 @@ def captureCredentials():
 
 
 def __init__():
-    if fileExist('data.json') is False:
+    if fileExist(current_path+'/data.json') is False:
         print('#############    Deploy Automation #################')
         print('-------------Preencha os dados abaixo.---------------')
         data = captureCredentials()
@@ -166,7 +171,8 @@ def __init__():
         if validate is False:
             return
 
-        created = createFileData('./data.json', json.dumps([data], indent=2))
+        created = createFileData(
+            current_path+'/data.json', json.dumps([data], indent=2))
 
         if created is False:
             print('Houve um erro ao gerar arquivo')
@@ -178,7 +184,7 @@ def __init__():
             project_selected = projects[project_selected - 1]
             initAutomation(data, os, project_selected)
     else:
-        servers = getData('data.json')
+        servers = getData(current_path+'/data.json')
         print('############## Selecione o servidor #################')
         for server in servers:
             print(f'{server["id"]} - {server["server"]}')
@@ -187,7 +193,7 @@ def __init__():
         if server_selected == 0:
             credential = captureCredentials()
             servers.append(credential)
-            createFileData('./data.json', json.dumps(servers, indent=2))
+            createFileData('data.json', json.dumps(servers, indent=2))
             return print('Server adicionado com sucesso!')
 
         server_selected = servers[server_selected - 1]
