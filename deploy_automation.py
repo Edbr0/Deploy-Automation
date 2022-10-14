@@ -64,6 +64,15 @@ def deployBackend(credentials):
     writeAndPressEnter('sudo docker-compose restart')
 
 
+def exitCommitScreen():
+    pa.hotkey('ctrl', 'o')
+    time.sleep(0.5)
+    pa.hotkey('ctrl', 'enter')
+    time.sleep(0.5)
+    pa.hotkey('ctrl', 'x')
+    time.sleep(0.5)
+
+
 # faz deploy do frontend
 
 def deployFrontend(credentials):
@@ -75,20 +84,24 @@ def deployFrontend(credentials):
     time.sleep(0.5)
     writeAndPressEnter(credentials["git_pssw"])
     time.sleep(4)
-    writeAndPressEnter('yarnbuild')
-    time.sleep(60)
-    writeAndPressEnter('sudo docker-compose restart')
+    exitCommitScreen()
+    time.sleep(1)
+    writeAndPressEnter('yyarnbuild')
 
 
-# Executa os passos da automaçãosudo docker-compose restart
-
-def initAutomation(credentials, os, project):
-    pa.PAUSE = 0.5
+def openTerminal():
     if os == 'Windows':
         pa.hotkey('win', 'r')
         writeAndPressEnter('cmd')
     else:
         pa.hotkey('win', 't')
+
+# Executa os passos da automaçãosudo docker-compose restart
+
+
+def initAutomation(credentials, os, project):
+    pa.PAUSE = 0.5
+    openTerminal()
     time.sleep(1)
     writeAndPressEnter(
         f'ssh {credentials["user_server"]}@{credentials["server"]}')
@@ -153,7 +166,7 @@ def __init__():
         if validate is False:
             return
 
-        created = createFileData('data.json', json.dumps([data], indent=2))
+        created = createFileData('./data.json', json.dumps([data], indent=2))
 
         if created is False:
             print('Houve um erro ao gerar arquivo')
@@ -174,7 +187,7 @@ def __init__():
         if server_selected == 0:
             credential = captureCredentials()
             servers.append(credential)
-            createFileData('data.json', json.dumps(servers, indent=2))
+            createFileData('./data.json', json.dumps(servers, indent=2))
             return print('Server adicionado com sucesso!')
 
         server_selected = servers[server_selected - 1]
