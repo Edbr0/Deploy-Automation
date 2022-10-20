@@ -31,6 +31,12 @@ projects = [
     },
     {
         'id': 6,
+        'name': 'samel-atendimento-santaclara-front-otp',
+        'path': 'samel-atendimento/clientes/santa-clara/api/samel-atendimento-back-otp',
+        'mode': 'api'
+    },
+    {
+        'id': 7,
         'name': 'gerencia-clinica-back-santaclara',
         'path': 'clientes/santaclara/gerencia-clinica/api/gerencia-clinica-back',
         'mode': 'api'
