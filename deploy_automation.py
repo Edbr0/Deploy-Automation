@@ -5,6 +5,7 @@ import platform
 from projects import projects
 import os as sys
 from pathlib import Path
+from datetime import datetime
 
 os = platform.system()
 
@@ -94,6 +95,33 @@ def deployFrontend(credentials):
     writeAndPressEnter('yyarnbuild')
 
 
+def deployFrontendInContainer(credentials, container):
+    writeAndPressEnter('sudo git pull')
+    time.sleep(0.5)
+    writeAndPressEnter(credentials["password_server"])
+    time.sleep(12)
+    writeAndPressEnter(credentials["git_login"])
+    time.sleep(0.5)
+    writeAndPressEnter(credentials["git_pssw"])
+    time.sleep(4)
+    exitCommitScreen()
+    time.sleep(1)
+    writeAndPressEnter(f'ssudo docker exec -it {container} bash')
+    time.sleep(1)
+    writeAndPressEnter(f'cd')
+    time.sleep(1)
+    writeAndPressEnter(f'cd /application/')
+    time.sleep(1)
+    to_day = datetime.now().strftime('%d-%m')
+    writeAndPressEnter(f'mv dist dist-{to_day}')
+    time.sleep(1)
+    writeAndPressEnter('yarn build')
+    time.sleep(60)
+    writeAndPressEnter('exit')
+    time.sleep(1)
+    writeAndPressEnter('sudo docker-compose restart')
+
+
 def openTerminal():
     if os == 'Windows':
         pa.hotkey('win', 'r')
@@ -115,7 +143,10 @@ def initAutomation(credentials, os, project):
     time.sleep(0.5)
     goToProject(project)
     if project["mode"] == 'front':
-        deployFrontend(credentials)
+        if 'container' in project:
+            deployFrontendInContainer(credentials, project["container"])
+        else:
+            deployFrontend(credentials)
     else:
         deployBackend(credentials)
 
@@ -123,7 +154,7 @@ def initAutomation(credentials, os, project):
     pa.alert('Deploy realizado com sucesso!')
 
 
-# Valida se todos os campos fora preenchidos
+# Valida se todos os campos foram preenchidos
 def fildsValidate(credentials):
     if not credentials["server"]:
         print('Ops... Você não informou o Servidor')

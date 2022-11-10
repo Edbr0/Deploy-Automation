@@ -1,13 +1,15 @@
 projects = [
     {
         'id': 1,
-        'name': 'gerencia-clinica-front',
+        'name': 'gerencia-clinica-front-medical',
         'path': 'clientes/medical/gerencia-clinica/front/gerencia-clinica-front',
-        'mode': 'front'
+        'mode': 'front',
+        'port': '11006',
+        'container': 'd6f70a06c0d9'
     },
     {
         'id': 2,
-        'name': 'gerencia-clinica-back',
+        'name': 'gerencia-clinica-back-medical',
         'path': 'clientes/medical/gerencia-clinica/api/gerencia-clinica-back',
         'mode': 'api'
     },
@@ -31,7 +33,7 @@ projects = [
     },
     {
         'id': 6,
-        'name': 'samel-atendimento-santaclara-front-otp',
+        'name': 'samel-atendimento-santaclara-back-otp',
         'path': 'samel-atendimento/clientes/santa-clara/api/samel-atendimento-back-otp',
         'mode': 'api'
     },
@@ -40,5 +42,12 @@ projects = [
         'name': 'gerencia-clinica-back-santaclara',
         'path': 'clientes/santaclara/gerencia-clinica/api/gerencia-clinica-back',
         'mode': 'api'
+    },
+    {
+        'id': 8,
+        'name': 'gerencia-clinica-front-santaclara',
+        'path': 'clientes/santaclara/gerencia-clinica/front/gerencia-clinica-front',
+        'mode': 'front',
+        'container': '3d16871922d8'
     }
 ]
