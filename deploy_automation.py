@@ -67,7 +67,9 @@ def deployBackend(credentials):
     time.sleep(0.5)
     writeAndPressEnter(credentials["git_pssw"])
     time.sleep(4)
-    writeAndPressEnter('sudo docker-compose restart')
+    exitCommitScreen()
+    time.sleep(1)
+    writeAndPressEnter('ssudo docker-compose restart')
 
 
 def exitCommitScreen():
@@ -93,6 +95,8 @@ def deployFrontend(credentials):
     exitCommitScreen()
     time.sleep(1)
     writeAndPressEnter('yyarnbuild')
+
+# faz deploy do frontend no container
 
 
 def deployFrontendInContainer(credentials, container):
