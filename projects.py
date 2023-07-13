@@ -40,14 +40,14 @@ projects = [
     {
         'id': 7,
         'name': 'gerencia-clinica-back-santaclara',
-        'path': 'clientes/santaclara/gerencia-clinica/api/gerencia-clinica-back',
+        'path': 'clientes/santaclara/development/gerencia/santaclara-gerencia-back',
         'mode': 'api'
     },
     {
         'id': 8,
         'name': 'gerencia-clinica-front-santaclara',
-        'path': 'clientes/santaclara/gerencia-clinica/front/gerencia-clinica-front',
+        'path': 'clientes/santaclara/development/gerencia/santaclara-gerencia-front',
         'mode': 'front',
-        'container': '3d16871922d8'
+        'container': '24de3173226d'
     }
 ]
