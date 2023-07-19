@@ -28,13 +28,13 @@ projects = [
     {
         'id': 5,
         'name': 'samel-atendimento-santaclara-front-otp',
-        'path': 'samel-atendimento/clientes/santa-clara/front/samel-atendimento-front-otp',
+        'path': 'clientes/santaclara/development/atendimento/samel-atendimento-front-otp',
         'mode': 'front'
     },
     {
         'id': 6,
         'name': 'samel-atendimento-santaclara-back-otp',
-        'path': 'samel-atendimento/clientes/santa-clara/api/samel-atendimento-back-otp',
+        'path': 'clientes/santaclara/development/atendimento/samel-atendimento-back-otp',
         'mode': 'api'
     },
     {
